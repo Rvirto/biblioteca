@@ -1,0 +1,49 @@
+shouldReturnCreatedWhenPostClient:
+  body: >-
+    {
+      "name":"Ruan Felipe",
+      "email":"ruanfelipe@outlook.com",
+      "documentType":"CPF",
+      "documentValue":"85274196387"
+    }
+
+shouldReturnBadRequestWhenPostClientWithoutName:
+  body: >-
+    {
+      "email":"ruanfelipe@outlook.com",
+      "documentType":"CPF",
+      "documentValue":"85274196387"
+    }
+
+shouldReturnBadRequestWhenPostClientWithoutEmail:
+  body: >-
+    {
+      "name":"Ruan Felipe",
+      "documentType":"CPF",
+      "documentValue":"85274196387"
+    }
+
+shouldReturnBadRequestWhenPostClientWithoutDocumentType:
+  body: >-
+    {
+      "name":"Ruan Felipe",
+      "email":"ruanfelipe@outlook.com",
+      "documentValue":"85274196387"
+    }
+
+shouldReturnBadRequestWhenPostClientWithoutDocumentValue:
+  body: >-
+    {
+      "name":"Ruan Felipe",
+      "email":"ruanfelipe@outlook.com",
+      "documentType":"CPF"
+    }
+
+shouldReturnConflictWhenPostClientAlreadyExists:
+  body: >-
+    {
+      "name":"David Barreiro",
+      "email":"davidbarreiro@outlook.com",
+      "documentType":"CPF",
+      "documentValue":"85274196387"
+    }

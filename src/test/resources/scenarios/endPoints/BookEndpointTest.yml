@@ -1,0 +1,58 @@
+shouldReturnCreatedWhenPostBook:
+  body: >-
+    {
+      "title":"Effective Java",
+      "author":"Joshua Bloch",
+      "yearPublication":"2001",
+      "status":"UNAVAILABLE"
+    }
+
+shouldReturnBadRequestWhenPostBookWithoutTitle:
+  body: >-
+    {
+      "author":"Joshua Bloch",
+      "yearPublication":"2001",
+      "status":"UNAVAILABLE"
+    }
+
+shouldReturnBadRequestWhenPostBookWithoutAuthor:
+  body: >-
+    {
+      "title":"Effective Java",
+      "yearPublication":"2001",
+      "status":"UNAVAILABLE"
+    }
+
+shouldReturnBadRequestWhenPostBookWithoutYearPublication:
+  body: >-
+    {
+      "title":"Effective Java",
+      "author":"Joshua Bloch",
+      "status":"UNAVAILABLE"
+    }
+
+shouldReturnBadRequestWhenPostBookWithoutStatus:
+  body: >-
+    {
+      "title":"Effective Java",
+      "author":"Joshua Bloch",
+      "yearPublication":"2001"
+    }
+
+shouldReturnBadRequestWhenPostBookWithWrongStatus:
+  body: >-
+    {
+      "title":"Effective Java",
+      "author":"Joshua Bloch",
+      "yearPublication":"2001",
+      "status":"INVALID_STATUS"
+    }
+
+shouldReturnConflictWhenPostBookAlreadyExists:
+  body: >-
+    {
+      "title":"Experience Java",
+      "author":"Joseph Willian",
+      "yearPublication":"2007",
+      "status":"AVAILABLE"
+    }
