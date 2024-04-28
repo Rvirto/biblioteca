@@ -3,11 +3,14 @@ package com.biblioteca.controller.endpoints;
 import com.biblioteca.controller.assemblers.LoanAssembler;
 import com.biblioteca.controller.models.request.LoanRequestModel;
 import com.biblioteca.controller.models.response.LoanResponseModel;
+import com.biblioteca.controller.validators.annotations.LoanMatrixParamValidation;
 import com.biblioteca.model.builders.LoanBuilder;
 import com.biblioteca.model.entities.Book;
 import com.biblioteca.model.entities.Client;
 import com.biblioteca.model.entities.Loan;
 import com.biblioteca.model.enumeration.LoanStatusEnum;
+import com.biblioteca.model.exceptions.BadRequestException;
+import com.biblioteca.model.exceptions.ConflictException;
 import com.biblioteca.model.exceptions.NotFoundException;
 import com.biblioteca.model.services.BookService;
 import com.biblioteca.model.services.ClientService;
@@ -17,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,9 +32,11 @@ import javax.validation.Valid;
 
 import static com.biblioteca.model.enumeration.ExceptionMessagesEnum.BOOK_NOT_FOUND;
 import static com.biblioteca.model.enumeration.ExceptionMessagesEnum.CLIENT_NOT_FOUND;
+import static com.biblioteca.model.enumeration.ExceptionMessagesEnum.LOAN_ALREADY_EXISTS;
 import static com.biblioteca.model.enumeration.ExceptionMessagesEnum.LOAN_NOT_FOUND;
 
 @RestController
+@Validated
 public class LoanEndpoint {
 
     public static final String LOAN_RESOURCE_PATH = "/api/loans";
@@ -60,21 +66,29 @@ public class LoanEndpoint {
 
     @PostMapping(LOAN_RESOURCE_PATH)
     public ResponseEntity<?> loan(@RequestBody @Valid LoanRequestModel loanRequestModel) {
-        final Book book = bookService.findById(loanRequestModel.getBookId()).orElseThrow(() -> new NotFoundException(BOOK_NOT_FOUND));
-        final Client client = clientService.findById(loanRequestModel.getClientId()).orElseThrow(() -> new NotFoundException(CLIENT_NOT_FOUND));
+        final Book book = bookService.findById(loanRequestModel.getBookId()).orElseThrow(() -> new BadRequestException(BOOK_NOT_FOUND));
+        final Client client = clientService.findById(loanRequestModel.getClientId()).orElseThrow(() -> new BadRequestException(CLIENT_NOT_FOUND));
         Loan loan = loanAssembler.toEntity(loanRequestModel, book, client);
+
+        loanService.findLoan(loan).ifPresent(searchedLoan -> {
+            throw new ConflictException(
+                    LOAN_ALREADY_EXISTS, loanAssembler
+                    .buildLoanSelfLink(searchedLoan.getId()).toUri());
+        });
+
         loan = loanService.loan(loan);
         return ResponseEntity.created(loanAssembler.buildLoanSelfLink(loan.getId()).toUri()).build();
     }
 
     @PostMapping(LOAN_DEVOLUTION_RESOURCE_PATH)
     public ResponseEntity<?> devolution(@PathVariable("loanId") final String loanId) {
-        Loan loan = loanService.findById(loanId).orElseThrow(() -> new NotFoundException(LOAN_NOT_FOUND));
+        Loan loan = loanService.findById(loanId).orElseThrow(() -> new BadRequestException(LOAN_NOT_FOUND));
         loanService.devolution(loan);
         return ResponseEntity.accepted().build();
     }
 
-    @GetMapping(LOAN_RESOURCE_PATH)
+    @GetMapping(LOAN_RESOURCE_PATH + "{matrixParam}")
+    @LoanMatrixParamValidation
     public ResponseEntity<?> getByValues(Pageable pageable,
                                          @MatrixVariable(value = "clientId", required = false) final String clientId,
                                          @MatrixVariable(value = "bookId", required = false) final String bookId,

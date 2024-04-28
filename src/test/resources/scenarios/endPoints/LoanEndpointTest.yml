@@ -1,0 +1,76 @@
+shouldReturnCreatedWhenPostLoan:
+  body: >-
+    {
+      "clientId":"a5993416-4255-11ec-71d3-0242ac130005",
+      "bookId":"a5993416-4255-11ec-71d3-0242ac130006",
+      "devolutionDate":"2024-08-23T23:01:40.619-03:00"
+    }
+
+shouldReturnBadRequestWhenPostLoanWithoutClientId:
+  body: >-
+    {
+      "bookId":"a5993416-4255-11ec-71d3-0242ac130006",
+      "devolutionDate":"2024-08-23T23:01:40.619-03:00"
+    }
+
+shouldReturnBadRequestWhenPostLoanWithoutBookId:
+  body: >-
+    {
+      "clientId":"a5993416-4255-11ec-71d3-0242ac130005",
+      "devolutionDate":"2024-08-23T23:01:40.619-03:00"
+    }
+
+shouldReturnBadRequestWhenPostLoanWithoutDevolutionDate:
+  body: >-
+    {
+      "clientId":"a5993416-4255-11ec-71d3-0242ac130005",
+      "bookId":"a5993416-4255-11ec-71d3-0242ac130006"
+    }
+
+shouldReturnBadRequestWhenPostLoanButAlreadyExists:
+  body: >-
+    {
+      "clientId":"a5993416-4255-11ec-71d3-0242ac130005",
+      "bookId":"a5993416-4255-11ec-71d3-0242ac130005",
+      "devolutionDate":"2024-08-23T23:01:40.619-03:00"
+    }
+
+shouldReturnBadRequestWhenPostLoanWhenBookIsUnavailable:
+  body: >-
+    {
+      "clientId":"a5993416-4255-11ec-71d3-0242ac130005",
+      "bookId":"a5993416-4255-11ec-71d3-0242ac130007",
+      "devolutionDate":"2024-08-23T23:01:40.619-03:00"
+    }
+
+shouldReturnBadRequestWhenPostLoanWhenClientIdNotExists:
+  body: >-
+    {
+      "clientId":"INVALID_CLIENT_ID",
+      "bookId":"a5993416-4255-11ec-71d3-0242ac130006",
+      "devolutionDate":"2024-08-23T23:01:40.619-03:00"
+    }
+
+shouldReturnBadRequestWhenPostLoanWhenBookIdNotExists:
+  body: >-
+    {
+      "clientId":"a5993416-4255-11ec-71d3-0242ac130005",
+      "bookId":"INVALID_BOOK_ID",
+      "devolutionDate":"2024-08-23T23:01:40.619-03:00"
+    }
+
+shouldReturnAcceptedWhenPostDevolution:
+  body: >-
+    {
+      "clientId":"a5993416-4255-11ec-71d3-0242ac130006",
+      "bookId":"a5993416-4255-11ec-71d3-0242ac130009",
+      "devolutionDate":"2024-08-23T23:01:40.619-03:00"
+    }
+
+shouldReturnAcceptedWhenPostDevolutionButLoanAlreadyReturned:
+  body: >-
+    {
+      "clientId":"a5993416-4255-11ec-71d3-0242ac130006",
+      "bookId":"a5993416-4255-11ec-71d3-0242ac130010",
+      "devolutionDate":"2024-08-23T23:01:40.619-03:00"
+    }

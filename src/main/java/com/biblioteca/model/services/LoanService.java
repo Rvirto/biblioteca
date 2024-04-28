@@ -6,6 +6,7 @@ import com.biblioteca.model.enumeration.LoanStatusEnum;
 import com.biblioteca.model.exceptions.BadRequestException;
 import com.biblioteca.model.repositories.LoanRepository;
 import com.biblioteca.model.repositories.LoanVersionRepository;
+import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -78,5 +79,9 @@ public class LoanService {
             loans = loans.stream().filter(loanSearched -> loanSearched.getStatus().equals(status.name())).collect(Collectors.toList());
         }
         return new PageImpl<>(loans, pageable, loans.size());
+    }
+
+    public Optional<Loan> findLoan(Loan loan) {
+        return this.loanRepository.findByClientIdAndBookId(loan.getClient().getId(), loan.getBook().getId());
     }
 }

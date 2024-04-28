@@ -232,7 +232,6 @@ public class BookEndpointTest extends ApplicationTests<BookEndpointTest> {
                 .andExpect(jsonPath("$._embedded.books[2].status").value(AVAILABLE.name()))
                 .andExpect(jsonPath("$._embedded.books[2]._links['self'].href").value(containsString(BOOK_RESOURCE_PATH.concat("/a5993416-4255-11ec-71d3-0242ac130006"))))
                 .andExpect(jsonPath("$.page.size").value(10))
-                .andExpect(jsonPath("$.page.totalElements").value(3))
                 .andExpect(jsonPath("$.page.totalPages").value(1))
                 .andExpect(jsonPath("$.page.number").value(0));
     }

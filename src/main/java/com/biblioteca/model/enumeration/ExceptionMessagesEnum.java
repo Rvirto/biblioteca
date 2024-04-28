@@ -18,7 +18,8 @@ public enum ExceptionMessagesEnum {
 
     //409
     BOOK_ALREADY_EXISTS(409001, "Book with these parameters already exists", HttpStatus.CONFLICT),
-    CLIENT_ALREADY_EXISTS(409002, "Client with these parameters already exists", HttpStatus.CONFLICT);
+    CLIENT_ALREADY_EXISTS(409002, "Client with these parameters already exists", HttpStatus.CONFLICT),
+    LOAN_ALREADY_EXISTS(409003, "Loan with these parameters already exists", HttpStatus.CONFLICT);
 
 
     private final Integer code;

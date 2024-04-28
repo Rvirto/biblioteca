@@ -51,4 +51,12 @@ public class ApplicationTests<T extends ApplicationTests<?>> {
         }
         return null;
     }
+
+    protected String getLoanIdOfLocation(String location) {
+        Matcher matcher = Pattern.compile(".*\\/loans\\/([a-zA-Z0-9-]+)(\\/?).*").matcher(location);
+        if (matcher.matches()) {
+            return matcher.group(1);
+        }
+        return null;
+    }
 }
