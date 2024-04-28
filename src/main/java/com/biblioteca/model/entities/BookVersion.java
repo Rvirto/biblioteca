@@ -28,7 +28,7 @@ public class BookVersion {
     @Column(name = "FLG_ENABLE", updatable = false)
     private Boolean enable;
 
-    @Column(name = "DAT_CREATION", insertable = false)
+    @Column(name = "DAT_CREATION", updatable = false)
     private ZonedDateTime creationDate;
 
     public BookVersion() {

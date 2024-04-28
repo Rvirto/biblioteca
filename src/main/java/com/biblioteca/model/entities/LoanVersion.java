@@ -28,7 +28,7 @@ public class LoanVersion {
     @Column(name = "COD_STATUS", nullable = false, updatable = false)
     private String status;
 
-    @Column(name = "DAT_CREATION", updatable = false, insertable = false)
+    @Column(name = "DAT_CREATION", updatable = false)
     private ZonedDateTime creationDate;
 
     public LoanVersion() {
