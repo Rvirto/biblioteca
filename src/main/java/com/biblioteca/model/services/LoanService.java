@@ -6,7 +6,6 @@ import com.biblioteca.model.enumeration.LoanStatusEnum;
 import com.biblioteca.model.exceptions.BadRequestException;
 import com.biblioteca.model.repositories.LoanRepository;
 import com.biblioteca.model.repositories.LoanVersionRepository;
-import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;

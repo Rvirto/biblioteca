@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 @Sql({ "/cleanup.sql", "/dataset.sql"})
 @ActiveProfiles("test")
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnabledIf(expression = "#{environment['spring.profiles.active'] == null}")
 public class ApplicationTests<T extends ApplicationTests<?>> {

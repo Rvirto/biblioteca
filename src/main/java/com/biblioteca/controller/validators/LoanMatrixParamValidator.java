@@ -1,7 +1,6 @@
 package com.biblioteca.controller.validators;
 
 import com.biblioteca.controller.validators.annotations.LoanMatrixParamValidation;
-import com.biblioteca.model.enumeration.BookStatusEnum;
 import com.biblioteca.model.enumeration.LoanStatusEnum;
 import com.biblioteca.model.exceptions.BadRequestException;
 import org.hibernate.validator.internal.engine.constraintvalidation.CrossParameterConstraintValidatorContextImpl;

@@ -1,9 +1,7 @@
 package com.biblioteca.controller.assemblers;
 
 import com.biblioteca.controller.endpoints.LoanEndpoint;
-import com.biblioteca.controller.models.request.ClientRequestModel;
 import com.biblioteca.controller.models.request.LoanRequestModel;
-import com.biblioteca.controller.models.response.ClientResponseModel;
 import com.biblioteca.controller.models.response.LoanResponseModel;
 import com.biblioteca.model.entities.Book;
 import com.biblioteca.model.entities.Client;

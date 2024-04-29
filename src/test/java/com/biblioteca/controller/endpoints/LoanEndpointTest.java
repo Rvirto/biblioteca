@@ -6,7 +6,6 @@ import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
-import static com.biblioteca.controller.endpoints.BookEndpoint.BOOK_RESOURCE_PATH;
 import static com.biblioteca.controller.endpoints.LoanEndpoint.LOAN_DEVOLUTION_RESOURCE_PATH;
 import static com.biblioteca.controller.endpoints.LoanEndpoint.LOAN_RESOURCE_PATH;
 import static com.biblioteca.controller.endpoints.LoanEndpoint.LOAN_SELF_PATH;
