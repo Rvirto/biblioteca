@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -68,7 +69,8 @@ public class LoanService {
 
     private Loan updateLoanStatus(Loan loan, LoanStatusEnum loanStatusEnum) {
         LoanVersion loanVersion = new LoanVersion(loan, loanStatusEnum);
-        this.loanVersionRepository.save(loanVersion);
+        loanVersion = this.loanVersionRepository.save(loanVersion);
+        loan.setVersions(Collections.singleton(loanVersion));
         return loan;
     }
 
@@ -81,6 +83,7 @@ public class LoanService {
     }
 
     public Optional<Loan> findLoan(Loan loan) {
-        return this.loanRepository.findByClientIdAndBookId(loan.getClient().getId(), loan.getBook().getId());
+        return this.loanRepository.findByClientIdAndBookId(loan.getClient().getId(), loan.getBook().getId())
+                .stream().filter(loanSearched -> !loanSearched.getStatus().equals(RETURNED.name())).findFirst();
     }
 }

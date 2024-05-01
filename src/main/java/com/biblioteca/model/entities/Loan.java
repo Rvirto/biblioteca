@@ -47,11 +47,6 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(Book book, Client client) {
-        this.book = book;
-        this.client = client;
-    }
-
     @PrePersist
     private void prePersist() {
         this.id = UUID.randomUUID().toString();

@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,7 +33,7 @@ public class BookService {
 
 
     public Optional<Book> findById(String bookId) {
-        return this.bookRepository.findById(bookId);
+        return bookRepository.findById(bookId);
     }
 
     public Page<Book> getByBook(Book book, Pageable pageable, BookStatusEnum status) {
@@ -52,7 +53,8 @@ public class BookService {
 
     public Book updateBookStatus(Book book, BookStatusEnum status) {
         BookVersion bookVersion = new BookVersion(book, status);
-        this.bookVersionRepository.save(bookVersion);
+        bookVersion = this.bookVersionRepository.save(bookVersion);
+        book.setVersions(Collections.singleton(bookVersion));
         return book;
     }
 

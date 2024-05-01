@@ -37,7 +37,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public HttpFirewall httpFirewall() {
         DefaultHttpFirewall firewall = new DefaultHttpFirewall();
-        firewall.setAllowUrlEncodedSlash(true); // Permitir barra inclinada codificada na URL
+        firewall.setAllowUrlEncodedSlash(true);
         return firewall;
     }
 
