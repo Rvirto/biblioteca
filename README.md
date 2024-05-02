@@ -49,5 +49,5 @@ Para visualizar os Endpoints da aplicação via Swagger, é necessário subir a 
 
 Após subir a aplicação, é necessário abrir seu navegador e inserir a seguinte URL:
 ```bash
-http://localhost:8080/swagger-ui/
+http://localhost:8080/swagger-ui/index.html
 ```

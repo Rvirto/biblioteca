@@ -1,8 +1,8 @@
 package com.biblioteca.infra;
 
-import com.biblioteca.controller.models.errors.ErrorModel;
-import com.biblioteca.model.exceptions.ConflictException;
-import com.biblioteca.model.exceptions.HttpException;
+import com.biblioteca.api.rest.models.errors.ErrorModel;
+import com.biblioteca.domain.exceptions.ConflictException;
+import com.biblioteca.domain.exceptions.HttpException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
