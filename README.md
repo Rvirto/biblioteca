@@ -38,3 +38,16 @@ requisição, selecione a aba "Authorization", e depois selecione o type "Basic 
 Username: admin
 Password: admin
 ```
+
+### Documentação Via Swagger
+
+Para visualizar os Endpoints da aplicação via Swagger, é necessário subir a aplicação, conforme o comando abaixo:
+
+```bash
+./mvnw spring-boot:run
+```
+
+Após subir a aplicação, é necessário abrir seu navegador e inserir a seguinte URL:
+```bash
+http://localhost:8080/swagger-ui/
+```
