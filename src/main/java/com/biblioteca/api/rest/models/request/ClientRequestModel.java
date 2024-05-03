@@ -4,6 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * Client request model data input class in request to create a client
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 public class ClientRequestModel {
 
     @NotBlank

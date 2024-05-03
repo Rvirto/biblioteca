@@ -6,6 +6,12 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+/**
+ * Error Model main class that centralizes all error returns
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @JsonPropertyOrder({ "errors" })
 public class ErrorModel extends RepresentationModel<ErrorModel> {
 

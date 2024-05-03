@@ -2,6 +2,12 @@ package com.biblioteca.api.rest.models.errors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+/**
+ * Error message model used to return thrown exception codes and messages in the body
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @JsonPropertyOrder({ "code", "message" })
 public class ErrorMessageModel {
 

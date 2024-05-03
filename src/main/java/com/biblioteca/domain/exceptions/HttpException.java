@@ -2,6 +2,12 @@ package com.biblioteca.domain.exceptions;
 
 import org.springframework.http.HttpStatus;
 
+/**
+ * Http request exception base class for all custom exceptions used to throw custom exceptions
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 public class HttpException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;

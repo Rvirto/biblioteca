@@ -9,6 +9,12 @@ import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Client class used to store client records
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @Entity
 @Table(name = "CLIENT")
 public class Client {

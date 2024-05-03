@@ -17,6 +17,12 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Loan class used to store accounting records
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @Entity
 @Table(name = "LOAN")
 public class Loan {

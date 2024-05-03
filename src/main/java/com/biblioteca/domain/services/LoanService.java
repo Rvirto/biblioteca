@@ -7,6 +7,7 @@ import com.biblioteca.domain.exceptions.BadRequestException;
 import com.biblioteca.domain.repositories.LoanRepository;
 import com.biblioteca.domain.repositories.LoanVersionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -26,6 +27,12 @@ import static com.biblioteca.domain.enumeration.ExceptionMessagesEnum.LOAN_ALREA
 import static com.biblioteca.domain.enumeration.LoanStatusEnum.BORROWED;
 import static com.biblioteca.domain.enumeration.LoanStatusEnum.RETURNED;
 
+/**
+ * Loan Service class used to meet any need related to a loan
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @Service
 public class LoanService {
 
@@ -44,18 +51,32 @@ public class LoanService {
         return this.loanRepository.findById(loanId);
     }
 
+    /**
+     * Loan method used to make a loan by creating and updating all necessary tables
+     * @param loan
+     * @return Loan
+     */
     @Transactional
     public Loan loan(Loan loan) {
-        if (loan.getBook().isNotEnable()) {
+        try {
+            if (loan.getBook().isNotEnable()) {
+                throw new BadRequestException(BOOK_IS_NOT_AVAILABLE);
+            }
+
+            loan = this.loanRepository.save(loan);
+            loan = this.updateLoanStatus(loan, BORROWED);
+            this.bookService.updateBookStatus(loan.getBook(), UNAVAILABLE);
+        } catch (DataIntegrityViolationException exception) {
             throw new BadRequestException(BOOK_IS_NOT_AVAILABLE);
         }
-
-        loan = this.loanRepository.save(loan);
-        loan = this.updateLoanStatus(loan, BORROWED);
-        this.bookService.updateBookStatus(loan.getBook(), UNAVAILABLE);
         return loan;
     }
 
+    /**
+     * Devolution method used to make a devolution by updating all necessary tables
+     * @param loan
+     * @return Loan
+     */
     @Transactional
     public Loan devolution(Loan loan) {
         if (!loan.getStatus().equals(BORROWED.name())) {
@@ -67,6 +88,12 @@ public class LoanService {
         return loan;
     }
 
+    /**
+     * Method used to version control the loan status
+     * @param loan
+     * @param loanStatusEnum
+     * @return Loan
+     */
     private Loan updateLoanStatus(Loan loan, LoanStatusEnum loanStatusEnum) {
         LoanVersion loanVersion = new LoanVersion(loan, loanStatusEnum);
         loanVersion = this.loanVersionRepository.save(loanVersion);
@@ -74,6 +101,13 @@ public class LoanService {
         return loan;
     }
 
+    /**
+     * Method used to perform loan consultation dynamically according to parameters
+     * @param loan
+     * @param status
+     * @param pageable
+     * @return Page<Loan>
+     */
     public Page<Loan> getByLoan(Loan loan, Pageable pageable, LoanStatusEnum status) {
         List<Loan> loans = this.loanRepository.findAll(Example.of(loan));
         if (status != null) {
@@ -82,6 +116,11 @@ public class LoanService {
         return new PageImpl<>(loans, pageable, loans.size());
     }
 
+    /**
+     * Method used to perform a loan query using clientId and BookId, returning only what is available
+     * @param loan
+     * @return Optional<Loan>
+     */
     public Optional<Loan> findLoan(Loan loan) {
         return this.loanRepository.findByClientIdAndBookId(loan.getClient().getId(), loan.getBook().getId())
                 .stream().filter(loanSearched -> !loanSearched.getStatus().equals(RETURNED.name())).findFirst();

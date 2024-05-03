@@ -11,6 +11,12 @@ import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Book version class to store status update history
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @Entity
 @Table(name = "BOOK_VERSION")
 public class BookVersion {

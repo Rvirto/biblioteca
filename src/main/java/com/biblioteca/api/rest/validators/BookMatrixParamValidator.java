@@ -15,6 +15,13 @@ import java.util.stream.IntStream;
 
 import static com.biblioteca.domain.enumeration.ExceptionMessagesEnum.REQUIRED_MATRIX_PARAM;
 
+/**
+ * Book Matrix Param Validator class used to validate the parameters sent to the query
+ * endpoint by MatrixParam in the Book Endpoint class
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @Component
 @SupportedValidationTarget(ValidationTarget.PARAMETERS)
 public class BookMatrixParamValidator
@@ -24,6 +31,13 @@ public class BookMatrixParamValidator
     public void initialize(BookMatrixParamValidation constraintAnnotation) {
     }
 
+    /**
+     * Method to validate existing parameters on the endpoint
+     * @param values object to validate
+     * @param constraintValidatorContext context in which the constraint is evaluated
+     *
+     * @return
+     */
     @Override
     public boolean isValid(Object[] values, ConstraintValidatorContext constraintValidatorContext) {
         List<String> parameterNames = ((CrossParameterConstraintValidatorContextImpl) constraintValidatorContext).getMethodParameterNames();

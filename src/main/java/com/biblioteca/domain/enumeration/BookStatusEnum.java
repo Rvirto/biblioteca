@@ -5,6 +5,12 @@ import java.util.Arrays;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
+/**
+ * Book status enum class used to map book related statuses
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 public enum BookStatusEnum {
 
     AVAILABLE(TRUE),

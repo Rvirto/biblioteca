@@ -10,6 +10,12 @@ import org.springframework.hateoas.server.core.Relation;
 
 import java.time.ZonedDateTime;
 
+/**
+ * Client Response Model class used to return information related to a client
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @JsonPropertyOrder({
         "id",
         "name",

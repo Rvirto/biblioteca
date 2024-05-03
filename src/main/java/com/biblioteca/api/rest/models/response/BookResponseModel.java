@@ -11,6 +11,12 @@ import org.springframework.hateoas.server.core.Relation;
 
 import java.time.ZonedDateTime;
 
+/**
+ * Book Response Model class used to return information related to a book
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @JsonPropertyOrder({
         "id",
         "title",

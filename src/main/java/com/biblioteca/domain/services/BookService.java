@@ -19,6 +19,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Book Service class used to meet any need related to a book
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @Service
 public class BookService {
 
@@ -36,6 +42,13 @@ public class BookService {
         return bookRepository.findById(bookId);
     }
 
+    /**
+     * Method used to perform book consultation dynamically according to parameters
+     * @param book
+     * @param pageable
+     * @param status
+     * @return Page<Book>
+     */
     public Page<Book> getByBook(Book book, Pageable pageable, BookStatusEnum status) {
         List<Book> books = this.bookRepository.findAll(Example.of(book));
         if (status != null) {
@@ -44,6 +57,12 @@ public class BookService {
         return new PageImpl<>(books, pageable, books.size());
     }
 
+    /**
+     * Method used to insert new books into the database
+     * @param book
+     * @param bookRequestModel
+     * @return
+     */
     @Transactional
     public Book create(Book book, BookRequestModel bookRequestModel) {
         book = this.bookRepository.save(book);
@@ -51,6 +70,12 @@ public class BookService {
         return book;
     }
 
+    /**
+     * Method used to version control the book status
+     * @param book
+     * @param status
+     * @return Book
+     */
     public Book updateBookStatus(Book book, BookStatusEnum status) {
         BookVersion bookVersion = new BookVersion(book, status);
         bookVersion = this.bookVersionRepository.save(bookVersion);

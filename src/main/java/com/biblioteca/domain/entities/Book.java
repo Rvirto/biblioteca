@@ -16,6 +16,12 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Book class used to store book records
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @Entity
 @Table(name = "BOOK")
 public class Book {

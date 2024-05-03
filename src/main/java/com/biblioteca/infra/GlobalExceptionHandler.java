@@ -16,6 +16,12 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import javax.validation.ValidationException;
 
+/**
+ * Global Exception Handler class used to handle exceptions in general, so that the messages returned in the body are standardized
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 

@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Client Service class used to meet any need related to a client
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @Service
 public class ClientService {
 
@@ -24,6 +30,11 @@ public class ClientService {
         return this.clientRepository.findById(bookId);
     }
 
+    /**
+     * Method used to insert new clients into the database
+     * @param client
+     * @return
+     */
     public Client create(Client client) {
         client = this.clientRepository.save(client);
         return client;

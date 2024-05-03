@@ -28,6 +28,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.web.util.UriComponentsBuilder.fromPath;
 
+/**
+ * Loan Endpoint Test class for validations of all existing endpoints and their returns from the Loan endpoint class
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 public class LoanEndpointTest extends ApplicationTests<LoanEndpointTest> {
 
     @Test

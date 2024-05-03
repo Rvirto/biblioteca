@@ -2,6 +2,12 @@ package com.biblioteca.domain.builders;
 
 import com.biblioteca.domain.entities.Book;
 
+/**
+ * Book Builder class used to dynamically create a Book entity
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 public class BookBuilder {
 
     private String title;

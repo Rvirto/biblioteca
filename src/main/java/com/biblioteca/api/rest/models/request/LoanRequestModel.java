@@ -7,6 +7,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
+/**
+ * Loan request model data input class in request to create a loan
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 public class LoanRequestModel {
 
     @NotBlank

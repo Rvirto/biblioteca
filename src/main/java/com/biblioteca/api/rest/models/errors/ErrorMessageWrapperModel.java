@@ -3,6 +3,12 @@ package com.biblioteca.api.rest.models.errors;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Error Message Wrapper Model class to wrap a list of error messages
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 public class ErrorMessageWrapperModel {
 
     private List<ErrorMessageModel> messages;

@@ -11,6 +11,12 @@ import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Loan version class to store status update history
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @Entity
 @Table(name = "LOAN_VERSION")
 public class LoanVersion {

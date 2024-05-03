@@ -5,6 +5,12 @@ import org.springframework.http.HttpStatus;
 
 import java.net.URI;
 
+/**
+ * Conflict Exception class used to throw custom exceptions
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 public class ConflictException extends HttpException {
 
     private static final long serialVersionUID = 1L;

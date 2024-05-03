@@ -11,10 +11,21 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
 
+/**
+ * Web Security Configuration authentication configuration class for accessing endpoints
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    /**
+     * Method used to configure authentication and release endpoints that do not require it
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic()
@@ -22,7 +33,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/books").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/books").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/books/**").permitAll() // Permitir todas as solicitações que começam com /api/books
+                .antMatchers(HttpMethod.GET, "/api/books/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/clients").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/clients/**").permitAll()
@@ -34,6 +45,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
     }
 
+    /**
+     * Method to set permission for URLs with MatrixParam
+     * @return HttpFirewall
+     */
     @Bean
     public HttpFirewall httpFirewall() {
         DefaultHttpFirewall firewall = new DefaultHttpFirewall();
@@ -41,6 +56,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return firewall;
     }
 
+    /**
+     * Method used to set username and password in memory
+     * @param auth
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()

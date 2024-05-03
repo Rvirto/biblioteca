@@ -13,6 +13,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Application Tests class that centralizes test configurations
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @Sql({ "/cleanup.sql", "/dataset.sql"})
 @ActiveProfiles("test")
 @AutoConfigureMockMvc(addFilters = false)

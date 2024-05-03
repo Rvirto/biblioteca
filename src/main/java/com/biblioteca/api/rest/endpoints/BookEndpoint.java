@@ -10,6 +10,9 @@ import com.biblioteca.domain.enumeration.BookStatusEnum;
 import com.biblioteca.domain.exceptions.ConflictException;
 import com.biblioteca.domain.exceptions.NotFoundException;
 import com.biblioteca.domain.services.BookService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +32,12 @@ import javax.validation.Valid;
 import static com.biblioteca.domain.enumeration.ExceptionMessagesEnum.BOOK_ALREADY_EXISTS;
 import static com.biblioteca.domain.enumeration.ExceptionMessagesEnum.BOOK_NOT_FOUND;
 
+/**
+ * Book Endpoint client access class for handling books
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @RestController
 @Validated
 public class BookEndpoint {
@@ -47,12 +56,33 @@ public class BookEndpoint {
         this.pagedResponseAssembler = pagedResponseAssembler;
     }
 
+    /**
+     * Endpoint search by book ID
+     * @param bookId
+     * @return
+     */
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "Consultation carried out successfully"),
+            @ApiResponse(responseCode = "404", description = "Book not found for Id informed"),
+            @ApiResponse(responseCode = "500", description = "Internal application error")})
+    @Operation(summary = "Book search endpoint by id")
     @GetMapping(BOOK_SELF_PATH)
     public ResponseEntity<BookResponseModel> getById(@PathVariable("bookId") final String bookId) {
         final Book book = bookService.findById(bookId).orElseThrow(() -> new NotFoundException(BOOK_NOT_FOUND));
         return ResponseEntity.ok().body(bookAssembler.toModel(book));
     }
 
+    /**
+     * Dynamic query endpoint via book information
+     * @param pageable
+     * @param title
+     * @param author
+     * @param status
+     * @param yearPublication
+     * @return
+     */
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "Consultation carried out successfully"),
+            @ApiResponse(responseCode = "500", description = "Internal application error")})
+    @Operation(summary = "Book search endpoint by parameter")
     @GetMapping(value = BOOK_RESOURCE_PATH + "{matrixParam}")
     @BookMatrixParamValidation
     public ResponseEntity<PagedModel<BookResponseModel>> getByValues(Pageable pageable,
@@ -67,6 +97,15 @@ public class BookEndpoint {
                 .body(pagedResponseAssembler.toModel(bookPage, bookAssembler));
     }
 
+    /**
+     * Book creation endpoint
+     * @param bookRequestModel
+     * @return
+     */
+    @ApiResponses({@ApiResponse(responseCode = "201", description = "Successfully created"),
+            @ApiResponse(responseCode = "409", description = "Existing registration"),
+            @ApiResponse(responseCode = "500", description = "Internal application error")})
+    @Operation(summary = "Book creation endpoint")
     @PostMapping(BOOK_RESOURCE_PATH)
     public ResponseEntity<?> create(@RequestBody @Valid BookRequestModel bookRequestModel) {
         Book book = bookAssembler.toEntity(bookRequestModel);

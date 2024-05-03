@@ -4,6 +4,12 @@ import org.springframework.http.HttpStatus;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
+/**
+ * Exception Message Enum class used to map all exceptions thrown in the project
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 public enum ExceptionMessagesEnum {
 
     //400
