@@ -13,6 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Request Tracker field class used to capture requests and generate logs related to them
+ *
+ * @author Renato Virto (renatovirtomoreira@outlook.com)
+ * @since 1.0.0
+ */
 @Component
 public class RequestTrackerFilter implements Filter {
 
