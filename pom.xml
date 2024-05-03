@@ -152,7 +152,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${build.helper.maven.plugin.version}</version>
+                <version>${springframework.boot.version}</version>
             </plugin>
 
             <!-- UNIT-TESTS -->

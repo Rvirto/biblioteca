@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Book request model data input class in request to create a book
@@ -23,6 +24,7 @@ public class BookRequestModel {
     private String author;
 
     @NotBlank
+    @Size(max = 4, message = "must have a maximum of 4 characters")
     @JsonProperty("yearPublication")
     private String yearPublication;
 

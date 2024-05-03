@@ -56,3 +56,12 @@ shouldReturnConflictWhenPostBookAlreadyExists:
       "yearPublication":"2007",
       "status":"AVAILABLE"
     }
+
+shouldReturnBadRequestWhenPostBookWithIncorrectYearPublication:
+  body: >-
+    {
+      "title":"Effective Java",
+      "author":"Joshua Bloch",
+      "yearPublication":"20050",
+      "status":"UNAVAILABLE"
+    }

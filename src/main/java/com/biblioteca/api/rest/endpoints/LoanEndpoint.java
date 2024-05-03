@@ -68,31 +68,16 @@ public class LoanEndpoint {
     }
 
     /**
-     * Endpoint search by loan ID
-     * @param loanId
-     * @return
-     */
-    @ApiResponses({@ApiResponse(responseCode = "200", description = "Consultation carried out successfully"),
-            @ApiResponse(responseCode = "401", description = "Not Authorized"),
-            @ApiResponse(responseCode = "404", description = "Loan not found for Id informed"),
-            @ApiResponse(responseCode = "500", description = "Internal application error")})
-    @Operation(summary = "Loan search endpoint by id")
-    @GetMapping(LOAN_SELF_PATH)
-    public ResponseEntity<LoanResponseModel> getById(@PathVariable("loanId") final String loanId) {
-        final Loan loan = loanService.findById(loanId).orElseThrow(() -> new NotFoundException(LOAN_NOT_FOUND));
-        return ResponseEntity.ok().body(loanAssembler.toModel(loan));
-    }
-
-    /**
      * Book lending endpoint
+     *
      * @param loanRequestModel
      * @return
      */
     @ApiResponses({@ApiResponse(responseCode = "201", description = "Successfully created"),
             @ApiResponse(responseCode = "400", description = "Book is not available for loan"),
+            @ApiResponse(responseCode = "400", description = "Book not found for Id informed"),
+            @ApiResponse(responseCode = "400", description = "Client not found for Id informed"),
             @ApiResponse(responseCode = "401", description = "Not Authorized"),
-            @ApiResponse(responseCode = "404", description = "Book not found for Id informed"),
-            @ApiResponse(responseCode = "404", description = "Client not found for Id informed"),
             @ApiResponse(responseCode = "409", description = "Existing registration"),
             @ApiResponse(responseCode = "500", description = "Internal application error")})
     @Operation(summary = "Book lending endpoint")
@@ -113,14 +98,32 @@ public class LoanEndpoint {
     }
 
     /**
+     * Endpoint search by loan ID
+     *
+     * @param loanId
+     * @return
+     */
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "Consultation carried out successfully"),
+            @ApiResponse(responseCode = "401", description = "Not Authorized"),
+            @ApiResponse(responseCode = "404", description = "Loan not found for Id informed"),
+            @ApiResponse(responseCode = "500", description = "Internal application error")})
+    @Operation(summary = "Loan search endpoint by id")
+    @GetMapping(LOAN_SELF_PATH)
+    public ResponseEntity<LoanResponseModel> getById(@PathVariable("loanId") final String loanId) {
+        final Loan loan = loanService.findById(loanId).orElseThrow(() -> new NotFoundException(LOAN_NOT_FOUND));
+        return ResponseEntity.ok().body(loanAssembler.toModel(loan));
+    }
+
+    /**
      * Book return endpoint
+     *
      * @param loanId
      * @return
      */
     @ApiResponses({@ApiResponse(responseCode = "202", description = "Return Accepted"),
             @ApiResponse(responseCode = "400", description = "Loan already returned"),
+            @ApiResponse(responseCode = "400", description = "Loan not found for Id informed"),
             @ApiResponse(responseCode = "401", description = "Not Authorized"),
-            @ApiResponse(responseCode = "404", description = "Loan not found for Id informed"),
             @ApiResponse(responseCode = "500", description = "Internal application error")})
     @Operation(summary = "Book return endpoint")
     @PostMapping(LOAN_DEVOLUTION_RESOURCE_PATH)
@@ -132,6 +135,7 @@ public class LoanEndpoint {
 
     /**
      * Dynamic query endpoint via loan information
+     *
      * @param pageable
      * @param clientId
      * @param bookId

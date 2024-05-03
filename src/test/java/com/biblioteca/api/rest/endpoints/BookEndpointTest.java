@@ -350,6 +350,22 @@ public class BookEndpointTest extends ApplicationTests<BookEndpointTest> {
     }
 
     @Test
+    public void shouldReturnBadRequestWhenPostBookWithIncorrectYearPublication() throws Exception {
+        final String uri = fromPath(BOOK_RESOURCE_PATH).toUriString();
+
+        String content = super.getScenarioBody("shouldReturnBadRequestWhenPostBookWithIncorrectYearPublication");
+
+        mockMvc.perform(post(uri)
+                        .content(content)
+                        .contentType(MediaType.APPLICATION_JSON)).andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errors.messages").exists())
+                .andExpect(jsonPath("$.errors.messages[0].code").value(BAD_REQUEST.value()))
+                .andExpect(jsonPath("$.errors.messages[0].message").value("yearPublication must have a maximum of 4 characters"))
+                .andExpect(jsonPath("$._links['self'].href").value(containsString(uri)));
+    }
+
+    @Test
     public void shouldReturnConflictWhenPostBookAlreadyExists() throws Exception {
         final String uri = fromPath(BOOK_RESOURCE_PATH).toUriString();
 
