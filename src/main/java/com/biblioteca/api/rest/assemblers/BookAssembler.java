@@ -1,7 +1,7 @@
 package com.biblioteca.api.rest.assemblers;
 
-import com.biblioteca.api.rest.models.request.BookRequestModel;
 import com.biblioteca.api.rest.endpoints.BookEndpoint;
+import com.biblioteca.api.rest.models.request.BookRequestModel;
 import com.biblioteca.api.rest.models.response.BookResponseModel;
 import com.biblioteca.domain.entities.Book;
 import org.springframework.hateoas.Link;

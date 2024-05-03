@@ -1,8 +1,8 @@
 package com.biblioteca.api.rest.endpoints;
 
+import com.biblioteca.api.rest.assemblers.ClientAssembler;
 import com.biblioteca.api.rest.models.request.ClientRequestModel;
 import com.biblioteca.api.rest.models.response.ClientResponseModel;
-import com.biblioteca.api.rest.assemblers.ClientAssembler;
 import com.biblioteca.domain.entities.Client;
 import com.biblioteca.domain.enumeration.ExceptionMessagesEnum;
 import com.biblioteca.domain.exceptions.ConflictException;

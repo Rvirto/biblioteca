@@ -23,6 +23,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     /**
      * Method used to configure authentication and release endpoints that do not require it
+     *
      * @param http
      * @throws Exception
      */
@@ -37,6 +38,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/clients").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/clients/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
@@ -47,6 +49,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     /**
      * Method to set permission for URLs with MatrixParam
+     *
      * @return HttpFirewall
      */
     @Bean
@@ -58,6 +61,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     /**
      * Method used to set username and password in memory
+     *
      * @param auth
      * @throws Exception
      */
